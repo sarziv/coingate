@@ -16,7 +16,11 @@ Route::get('/','ProductsController@index')->name('app');
 Route::get('/cart', function () {
     return view('cart');
 });
-Route::get('/add-to-cart/{id}/{item}/{price}',[
+Route::get('/add-to-cart/{id}',[
    'uses' => 'ProductsController@getAddToCart',
    'as' => 'product.addToCart'
+]);
+Route::get('/currency/{type}',[
+    'uses' => 'CurrencyController@setCurrency',
+    'as' => 'setCurrency'
 ]);

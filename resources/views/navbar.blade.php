@@ -1,5 +1,6 @@
+
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark " style="margin-bottom: 20px">
-    <a class="navbar-brand" href="#">CoinGate</a>
+    <a class="navbar-brand" href="{{route('app')}}">CoinGate</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,6 +9,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Source code</a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="#">Info</a>
             </li>
@@ -15,13 +17,13 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Currency:
+                    Currency
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">USD</a>
-                    <a class="dropdown-item" href="#">EURO</a>
-                    <a class="dropdown-item" href="#">BTC</a>
-                    <a class="dropdown-item" href="#">Litcoin</a>
+               <div class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{route('setCurrency',['type'=>"USD"])}}">USD</a>
+                    <a class="dropdown-item" href="{{route('setCurrency',['type'=>"EUR"])}}">EURO</a>
+                    <a class="dropdown-item" href="{{route('setCurrency',['type'=>"BTC"])}}">BTC</a>
+                    <a class="dropdown-item" href="{{route('setCurrency',['type'=>"ETH"])}}">ETH</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -29,9 +31,9 @@
                     My Account
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">My Settings</a>
-                    <a class="dropdown-item" href="#">Cart</a>
-                    <a class="dropdown-item" href="#">Orders</a>
+                    <a class="dropdown-item" href="">My Settings</a>
+                    <a class="dropdown-item" href="">Cart</a>
+                    <a class="dropdown-item" href="">Orders</a>
                     <a class="dropdown-item" href="https://coingate.com/sign_up">Sign Up</a>
                 </div>
             </li>
