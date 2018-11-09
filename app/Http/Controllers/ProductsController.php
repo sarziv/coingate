@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Cart;
+use App\Currency;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -13,8 +14,23 @@ class ProductsController extends Controller
 {
     public function index ()
     {
+
         $products = Product::all();
-        return view('app', ['products' => $products]);
+        if (!Session::has('cart') && !Session::has('currency')) {
+            return view('app', compact(['products']));
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $items = $cart->items;
+        $totalPrice = $cart->totalPrice;
+        $totalQty = $cart->totalQty;
+
+        $oldCurrency = Session::get('currency');
+        $currency = new Currency($oldCurrency);
+        $currencyType = $currency->currencyType;
+        $currencyRate = $currency->currencyRate;
+
+        return view('app', compact(['products', 'items', 'totalPrice', 'totalQty', 'currencyType', 'currencyRate']));
     }
 
     public function getAddToCart (Request $request, $id)
@@ -25,19 +41,19 @@ class ProductsController extends Controller
 
         $cart->add($product, $product->id);
         $request->session()->put('cart', $cart);
-        //dd($request->session()->get('cart'));
-        //session()->flush();
 
         return redirect()->route('app');
     }
 
-    public function getCart ()
+
+    public function removeCart ()
     {
-        if (Session::has('cart')) {
-            return view('app');
-        }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        return view('app'/*,['products' => $cart->items,'totalPrice'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]*/);
+        session()->forget('cart');
+        return redirect()->route('app');
+    }
+
+    public function checkoutCart ()
+    {
+
     }
 }

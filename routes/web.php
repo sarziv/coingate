@@ -13,9 +13,6 @@
 
 Route::get('/','ProductsController@index')->name('app');
 
-Route::get('/cart', function () {
-    return view('cart');
-});
 Route::get('/add-to-cart/{id}',[
    'uses' => 'ProductsController@getAddToCart',
    'as' => 'product.addToCart'
@@ -23,4 +20,12 @@ Route::get('/add-to-cart/{id}',[
 Route::get('/currency/{type}',[
     'uses' => 'CurrencyController@setCurrency',
     'as' => 'setCurrency'
+]);
+Route::get('/cart/remove',[
+    'uses' => 'ProductsController@removeCart',
+    'as' => 'cart.remove'
+]);
+Route::get('/cart/checkout',[
+    'uses' => 'ProductsController@checkoutCart',
+    'as' => 'cart.checkout'
 ]);

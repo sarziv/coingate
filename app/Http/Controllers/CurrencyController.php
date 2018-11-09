@@ -13,9 +13,10 @@ class CurrencyController extends Controller
         //Receive currency type
     }
 
+    //set up product currency
     public function setCurrency (Request $request, $type)
     {
-        //set up product currency
+
         $client = new \GuzzleHttp\Client();
         $requestClient = $client->get("https://api.coingate.com/v2/rates/merchant/USD/" . "$type");
         $rate = $requestClient->getBody()->getContents();
@@ -23,7 +24,7 @@ class CurrencyController extends Controller
         $oldCurrency = Session::has('currency') ? Session::get('currency') : null;
         $currency = New Currency($oldCurrency);
 
-        $currency->changeCurrency($type,$rate);
+        $currency->changeCurrency($type, $rate);
 
         $request->session()->put('currency', $currency);
 
