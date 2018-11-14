@@ -21,12 +21,14 @@ class ProductsController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        $items = $cart->items;
-        $totalPrice = $cart->totalPrice;
-        $totalQty = $cart->totalQty;
 
         $oldCurrency = Session::get('currency');
         $currency = new Currency($oldCurrency);
+
+        //View
+        $items = $cart->items;
+        $totalPrice = $cart->totalPrice;
+        $totalQty = $cart->totalQty;
         $currencyType = $currency->currencyType;
         $currencyRate = $currency->currencyRate;
 
