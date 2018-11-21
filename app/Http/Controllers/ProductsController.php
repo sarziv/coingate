@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Currency;
 use App\Product;
+use App\Checkout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -56,6 +57,22 @@ class ProductsController extends Controller
 
     public function checkoutCart ()
     {
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $oldCurrency = Session::get('currency');
+        $currency = new Currency($oldCurrency);
 
+        $currencyType = $currency->currencyType;
+        $totalPrice = $cart->totalPrice;
+
+        if($totalPrice != null && $currencyType != null){
+            $checkout = new Checkout();
+            $paymenturl = $checkout->checkoutPayment($totalPrice,$currencyType);
+
+        }else{
+            echo "Parameters are missing.";
+        }
+
+        return redirect($paymenturl);
     }
 }

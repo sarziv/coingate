@@ -10,7 +10,7 @@ class Currency
 
     public function __construct ($oldCurrency)
     {
-        //old session constructor
+        //old session
         if ($oldCurrency) {
             $this->currencyType = $oldCurrency->currencyType;
             $this->currencyRate = $oldCurrency->currencyRate;
